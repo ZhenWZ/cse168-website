@@ -72,9 +72,9 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="static/images/carousel1.jpg" id="tree" height="100%" alt="Banner Image">
+      <img src="static/images/cornellbox-water_pm.png" id="water" height="100%" alt="Banner Image">
       <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+        Desired output of our project: Cornell Box with water caustics using photon mapping. 
       </h2>
     </div>
   </div>
@@ -88,8 +88,21 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Description</h2>
         <div class="content has-text-justified">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+<p>We will implement photon mapping from scratch for our final project, focusing on its advantage over ray tracing in terms of global illumination and caustics. Our goal is to design scenes that highlight the advantages of photon mapping and analyze the differences between the images produced by photon mapping and those produced by the techniques we previously implemented in this class.</p>
+
+<p> Our photon mapping implementation will include the following blocks:
+<ol> 
+  <li>Photon emission: Make photons emit from light sources to different directions. For point light, photons will be emitted in all directions. For area light, photons will be emitted within 90 degrees of the normal.</li>
+  <li>gathering: For each intersection point (the point where the light hit the surface), we will find n closest photons around that point.</li> 
+  <li>equations (BRDF, reflectance equations, etc) to do rendering and output final image.</li> 
+</ol>
+</p>
+
+<p> The final deliverable will include:
+<ol>
+  <li>A few scenes (~3) that illustrate the differences between photon mapping and ray tracing. </li>
+  <li>Ablation studies on different components of photon mapping (e.g. results of with and without photon gathering) to understand their impact on the final output. </li>
+</ol>
           </p>
         </div>
       </div>
@@ -106,30 +119,30 @@
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
         <!-- Your image here -->
-        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
+        <img src="static/images/cornellBRDF.png" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-          First image description.
+          Cornell Box with BRDF.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
+        <img src="static/images/cornellCosine.png" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-          Second image description.
+                Cornell box with cosine weighting.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
+        <img src="static/images/cornellRR.png" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-         Third image description.
+                Cornell box with Russian roulette.
        </h2>
      </div>
      <div class="item">
       <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
+      <img src="static/images/dragon.png" alt="MY ALT TEXT"/>
       <h2 class="subtitle has-text-centered">
-        Fourth image description.
+                Dragon scene with BRDF.
       </h2>
     </div>
   </div>
