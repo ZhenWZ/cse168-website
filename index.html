@@ -74,9 +74,9 @@
     <div class="hero-body">
       <div class="columns is-centered">
         <div class="column is-half">
-          <img src="static/images/cornellbox-water_pm.png" id="water" height="100%" alt="Banner Image">
+          <img src="static/images/final_pic.jpg" id="water" height="100%" alt="Banner Image">
           <h2 class="subtitle has-text-centered">
-            Desired output of our project: Cornell Box with water caustics using photon mapping. 
+            Final output using Photon Mapping. 
           </h2>
         </div>
       </div>
@@ -93,22 +93,32 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Description</h2>
         <div class="content has-text-justified">
-<p>We will implement photon mapping from scratch for our final project, focusing on its advantage over ray tracing in terms of global illumination and caustics. Our goal is to design scenes that highlight the advantages of photon mapping and analyze the differences between the images produced by photon mapping and those produced by the techniques we previously implemented in this class.</p>
 
-<p> Our photon mapping implementation will include the following blocks:
+<p>Photon mapping is a two-pass global illumination algorithm to simulate realistic lighting. 
+  Compared to ray tracing, can effectively handle complex light interactions such as caustics and diffuse interreflections. 
+  Also, it's less computationally expensive than traditional ray tracing in general, because it's precomputes the global illumination.</p>
+<p>We implemented photon mapping from <b>scratch</b> for our final project.</p>
+
+<p> Our photon mapping implementation includes the following:
 <ol> 
-  <li>Photon emission: Make photons emit from light sources to different directions. For point light, photons will be emitted in all directions. For area light, photons will be emitted within 90 degrees of the normal.</li>
-  <li>gathering: For each intersection point (the point where the light hit the surface), we will find n closest photons around that point.</li> 
-  <li>equations (BRDF, reflectance equations, etc) to do rendering and output final image.</li> 
+  <li> <b>Photon Maps</b>: We emit photons from area lights and calculate each photon's throughput upon hitting a surface.
+    The photon's position, direction, and throughput are stored in a KD Tree for efficient retrieval.
+    We maintain two photon maps: one for global illumination and one for caustics.
+    The global illumination photon map stores all the photons that hit a diffuse surface, and the caustics photon map stores all the photons that hit a diffuse surface and then a specular surface in sequence.
+  </li>
+  <li> <b>Gathering</b>: At each intersection point (where light hits a surface), we search for all photons within a radius of 0.5 units around the intersection point. </li> 
+  <li> <b>Rendering</b>: (BRDF, reflectance equations, etc) to do rendering and output final image.</li> 
 </ol>
 </p>
 
-<p> The final deliverable will include:
+<p> We use the following techniques to improve sampling quality and reduce computational time:
 <ol>
-  <li>A few scenes (~3) that illustrate the differences between photon mapping and ray tracing. </li>
-  <li>Ablation studies on different components of photon mapping (e.g. results of with and without photon gathering) to understand their impact on the final output. </li>
+  <li><b>KD Tree</b>: We use KD Tree to store the photons, so that when finding nearest K photons around an intersection point, we can use tree search to reduce searching time. </li>
+  <li><b>Cosine Importance Sampling</b>: We implement cosine importance sampling to prioritize sample directions that contribute more to the desired illumination, improving the accuracy and efficiency of our sampling process.  </li>
+  <li><b>Russian Roulette</b>: We use RR to probabilistically terminate paths when their throughput becomes very small, which adaptively focuses the computational resources on more important paths.  </li>
 </ol>
           </p>
+<p> <b>We include a few of our results below: </b> </p>
         </div>
       </div>
     </div>
@@ -124,23 +134,24 @@
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
         <!-- Your image here -->
-        <img src="static/images/cornellBRDF.png" alt="MY ALT TEXT"/>
+      
+        <img src="static/images/final_pic.jpg" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-          Cornell Box with BRDF.
+          4 colored balls with photon mapping.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/cornellCosine.png" alt="MY ALT TEXT"/>
+        <img src="static/images/final_pic_onlydirect.jpg" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-                Cornell box with cosine weighting.
+                4 colored balls with only direct lighting.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/cornellRR.png" alt="MY ALT TEXT"/>
+        <img src="static/images/final_pic_onlyindirect.jpg" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-                Cornell box with Russian roulette.
+                4 colored balls with only indirect lighting.
        </h2>
      </div>
      <div class="item">
